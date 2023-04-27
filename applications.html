@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <!-- start right frame -->
+  <head>
+    <title>College Applications</title>
+    ~[wc:commonscripts]
+    <link href="/images/css/screen.css" rel="stylesheet" media="screen" />
+    <link href="/images/css/print.css" rel="stylesheet" media="print" />
+  </head>
+  <body>
+    ~[wc:admin_header_frame_css]<!-- breadcrumb start --><a
+      href="/admin/home.html"
+      target="_top"
+      >Start Page</a
+    >
+    &gt;
+    <a href="home.html?selectstudent=nosearch" target="_top">
+      Student Selection
+    </a>
+    &gt; College Applications<!-- breadcrumb end -->~[wc:admin_navigation_frame_css]
+    ~[wc:title_student_begin_css]College Applications~[wc:title_student_end_css]
+    <!-- start of content and bounding box -->
+    <div class="box-round">
+      <p style="text-align: center">
+        <a
+          href="applications-new.html?frn=~(studentfrn)"
+          id="btnNew"
+          name="btnNew"
+          class="button"
+          >New</a
+        >
+      </p>
+      <table class="grid" id="applications">
+        <thead>
+          <tr style="border: 1px solid grey">
+            <th class="bold" style="width: 20px; text-align: center">Edit</th>
+            <th class="bold" style="width: 200px">Institution</th>
+            <th class="bold" style="width: 65px">Request Date</th>
+            <th class="bold" style="width: 75px">Status</th>
+            <th class="bold" style="width: 50px">Scholarship?</th>
+            <th class="bold" style="width: 65px">Completion Date</th>
+            <th class="bold" style="width: 75px">Outcome</th>
+            <th class="bold" style="width: 200px">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          ~[tlist_sql; select studentsdcid, ID, Institution, Request_Date, CASE
+          Request_Status WHEN 'N' THEN 'New' WHEN 'U' THEN 'Under Development'
+          WHEN 'C' THEN 'Complete (Not Submitted)' WHEN 'S' THEN 'Submitted'
+          ELSE '' END Request_Status, CASE to_char(Scholarship) WHEN '1' THEN
+          'Yes - ' || TO_CHAR(Scholarship_Amount, '$999,999.00') ELSE 'No' END
+          Scholarship, Completion_Date, CASE Outcome WHEN 'C' THEN 'Considering'
+          WHEN 'W' THEN 'Waitlist' WHEN 'A' THEN 'Accepted' WHEN 'D' THEN
+          'Denied' WHEN 'O' THEN 'Other' END Outcome, Notes FROM U_APPLICATIONS
+          a WHERE StudentsDCID = ~(rn) ORDER BY ID]
+          <tr>
+            <td align="center">
+              <a href="applications-edit.html?frn=001~(dcid)&id=~(id)">
+                <img
+                  src="/images/btn_edit.gif"
+                  width="16"
+                  height="16"
+                  border="0"
+                />
+              </a>
+            </td>
+            <td>~(Institution)</td>
+            <td>~(Request_Date;d)</td>
+            <td>~(Request_Status)</td>
+            <td>~(Scholarship)</td>
+            <td>~(Completion_Date;d)</td>
+            <td>~(Outcome)</td>
+            <td>~(Notes)</td>
+          </tr>
+          [/tlist_sql]
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <!-- end of content of bounding box -->
+    ~[wc:admin_footer_frame_css]
+  </body>
+</html>
+<!-- end right frame -->

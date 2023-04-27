@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<!-- start right frame -->
+<head>
+<title>Edit College Application</title>
+~[wc:UI_js_includes]
+~[wc:commonscripts]
+<link href="/images/css/screen.css" rel="stylesheet" media="screen">
+<link href="/images/css/print.css" rel="stylesheet" media="print">
+</head>
+<body>
+<form id="edit_application" action="applications.html?frn=~(frn)" method="POST">
+    ~[wc:admin_header_frame_css]<!-- breadcrumb start --><a href="/admin/home.html"
+    target="_top">Start Page</a> &gt; <a href="home.html?selectstudent=nosearch"
+    target="_top">Student Selection</a> &gt; Edit College Application<!-- breadcrumb end -->~[wc:admin_navigation_frame_css]
+    ~[wc:title_student_begin_css]Edit College Application~[wc:title_student_end_css]
+    <!-- start of content and bounding box -->
+    <div class="box-round">
+    ~[DirectTable.Select:U_APPLICATIONS;ID:~(gpv.id)]
+    <fieldset id="application">
+    <legend>Application Details</legend>
+    <div>
+    <label style="width: 140px">Institution:</label>
+    <input type="text" name="[U_APPLICATIONS]Institution" value=""
+    id="Institution" size="50" />
+    </div>
+    <div>
+    <label style="width: 140px">Request Date:</label>
+    <input type="text" name="[U_APPLICATIONS]Request_Date" value=""
+    id="Request_Date" />
+    </div>
+    <div>
+    <label style="width: 140px">Request Status:</label>
+    <select name="[U_APPLICATIONS]Request_Status" id="Request_Status">
+    <option value="">Select a Status</option>
+    <option value="N">New</option>
+    <option value="U">Under Development</option>
+    <option value="C">Complete (Not Submitted)</option>
+    <option value="S">Submitted</option>
+    </select>
+    </div>
+    <div>
+    <label style="width: 140px">Scholarship:</label>
+    <input type="checkbox" name="[U_APPLICATIONS]Scholarship" value="1"
+    id="Scholarship" />&nbsp;(Yes)
+    </div>
+    <div>
+    <label style="width: 140px">Scholarship Amount:</label>
+    $<input type="text" name="[U_APPLICATIONS]Scholarship_Amount" value=""
+    id="Scholarship_Amount" size="8" />
+    </div>
+    <div>
+    <label style="width: 140px">Completion Date:</label>
+    <input type="text" name="[U_APPLICATIONS]Completion_Date" value=""
+    id="Completion_Date" />
+    </div>
+    <div>
+    <label style="width: 140px">Outcome:</label>
+    <select name="[U_APPLICATIONS]Outcome" id="Outcome">
+    <option value="">Select an Outcome</option>
+    <option value="C">Considering</option>
+    <option value="W">Waitlist</option>
+    <option value="A">Accepted</option>
+    <option value="D">Denied</option>
+    <option value="O">Other</option>
+    </select>
+    </div>
+    <div>
+    <label style="width: 140px">Notes:</label>
+    <!-- <textarea name="[U_APPLICATIONS]Notes" cols="50" rows="5" id="Notes" /> -->
+    </div>
+    </fieldset>
+    <div class="button-row" id="row1">
+    <input type="hidden" name="ac" value="prim">
+    <button name="btnSubmit" id="btnSubmit" type="submit">Submit</button>
+    </div>
+</form>
+<div class="button-row" id="row2">
+<form id="delete_button" action="applications.html?frn=~(studentfrn)" method="post">
+    <input type="hidden" name="ac" value="prim" />
+    <input type="hidden" name="DD-U_APPLICATIONS.ID:~(gpv.id)" value="1" />
+    <button class="btnConfirmProxy" id="btnDelete">Delete</button>
+</form>
+</div>
+</div>
+~[wc:admin_footer_frame_css]
+</body>
+</html><!-- end right frame -->
+
